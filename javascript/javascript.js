@@ -50,13 +50,15 @@ function displayGif(button) {
                 animalImage.addClass("gif-image");
                 animalImage.attr(`data-id`, index);
                 animalImage.attr("data-state", "still")
+                animalImage.attr('data-still', element.images.fixed_width_still.url);
+                animalImage.attr('data-animated', results[index].images.fixed_width.url);
 
                 //get rating and put into text
                 var rating = element.rating;
                 var p = $("<p>").text("Rating: " + rating);
 
                 //pull gif src url 
-                animalImage.attr("src", element.images.fixed_height.url);
+                animalImage.attr("src", element.images.fixed_width_still.url);
 
                 // Appending the paragraph and animalImage we created to the "gifDiv" div we created
                 gifDiv.append(p);
@@ -70,21 +72,18 @@ function displayGif(button) {
             $("#gifs-here").on("click", '.gif-image', function () {
                 // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
                 var state = $(this).attr("data-state");
-              
+
                 //need to update our URL using .fixed_height_still etc.
                 var imgIndex = parseInt($(this).attr('data-id'));
-                var anim = response.data.imgIndex.images.fixed_height.url
-                var still =response.data.imgIndex.images.fixed_height_still.url
-
-                console.log(anim);
-                console.log(still);
-                // if (state === "still") {
-                //     $(this).attr("src", data.imgIndex.images.fixed_height.url);
-                //     $(this).attr("data-state", "animate");
-                // } else {
-                //     $(this).attr("src", data.imgIndex.images.fixed_height_still.url);
-                //     $(this).attr("data-state", "still");
-                // }
+                
+                
+                if (state === "still") {
+                    $(this).attr("src", $(this).attr('data-animated'));
+                    $(this).attr("data-state", "animate");
+                } else {
+                    $(this).attr("src", $(this).attr('data-still'));
+                    $(this).attr("data-state", "still");
+                }
             });
         });
 }

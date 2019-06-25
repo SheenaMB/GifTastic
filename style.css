@@ -12,6 +12,17 @@ h1 {
     padding: 30px;
     
 }
+#gifs-here {
+    display: flex;
+    flex-wrap: wrap;
+}
+#add-animal{
+    border-radius: 8px;
+    display: inline-block;
+    text-align: center;
+    margin: 10px;
+    background: rgb(50, 235, 192);
+}
 
 button {
     border-radius: 8px;
@@ -19,5 +30,7 @@ button {
     text-align: center;
     margin: 10px;
     background: rgb(50, 235, 192);
-
+}
+img {
+    margin: 10px;
 }
