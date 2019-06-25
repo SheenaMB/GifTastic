@@ -1,10 +1,23 @@
 body{
     background: rgb(194, 194, 254);
 }
+h1 {
+    padding: 10px;
+}
 
 #animal-form {
     float: right;
 }
 #main-container{
+    padding: 30px;
     
+}
+
+button {
+    border-radius: 8px;
+    display: inline-block;
+    text-align: center;
+    margin: 10px;
+    background: rgb(50, 235, 192);
+
 }

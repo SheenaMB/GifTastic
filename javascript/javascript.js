@@ -5,7 +5,7 @@
 //on"click" of image --> data-status should change from still to animate etc.
 //also pull the rating of GIF - disply under each GIF
 
-var topics = ["Dolphin", "Whale", "Otter", "Penguin", "Monkey", "Koala", "Chinchilla",];
+var topics = ["Dolphin", "Doxie", "Otter", "Penguin", "Monkey", "Koala", "Chinchilla",];
 
 //create buttons based off of the names in the array
 function makeButtons() {
@@ -21,13 +21,12 @@ function makeButtons() {
         event.preventDefault();
         displayGif(this);
     });
-}  
+}
 
 makeButtons();
 
 
 function displayGif(button) {
-    console.log(button);
 
     var animal = $(button).attr("data-name");
     var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10";
@@ -45,9 +44,12 @@ function displayGif(button) {
             // Storing an array of results in the results variable
             var results = response.data;
 
-            results.forEach(function (element) {
+            results.forEach(function (element, index) {
                 var gifDiv = $("<div>");
                 var animalImage = $("<img>");
+                animalImage.addClass("gif-image");
+                animalImage.attr(`data-id`, index);
+                animalImage.attr("data-state", "still")
 
                 //get rating and put into text
                 var rating = element.rating;
@@ -62,6 +64,27 @@ function displayGif(button) {
 
                 // Prepending the gifDiv to the "#gifs-appear-here" div in the HTML
                 $("#gifs-here").prepend(gifDiv);
+            });
+
+            //element in html (gif here) event listener on parent component
+            $("#gifs-here").on("click", '.gif-image', function () {
+                // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+                var state = $(this).attr("data-state");
+              
+                //need to update our URL using .fixed_height_still etc.
+                var imgIndex = parseInt($(this).attr('data-id'));
+                var anim = response.data.imgIndex.images.fixed_height.url
+                var still =response.data.imgIndex.images.fixed_height_still.url
+
+                console.log(anim);
+                console.log(still);
+                // if (state === "still") {
+                //     $(this).attr("src", data.imgIndex.images.fixed_height.url);
+                //     $(this).attr("data-state", "animate");
+                // } else {
+                //     $(this).attr("src", data.imgIndex.images.fixed_height_still.url);
+                //     $(this).attr("data-state", "still");
+                // }
             });
         });
 }
@@ -90,6 +113,8 @@ $("#add-animal").on("click", function (event) {
 
     // Calling renderButtons which handles the processing of our movie array
     makeButtons();
-//    displayGif();
+    //    displayGif();
 });
+
+
 
