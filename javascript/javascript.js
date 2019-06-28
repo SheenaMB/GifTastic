@@ -5,7 +5,7 @@
 //on"click" of image --> data-status should change from still to animate etc.
 //also pull the rating of GIF - disply under each GIF
 
-var topics = ["Dolphin", "Doxie", "Otter", "Penguin", "Monkey", "Koala", "Chinchilla",];
+var topics = ["Dolphin", "Doxie", "Otter", "Penguin", "Monkey", "Chinchilla",];
 
 //create buttons based off of the names in the array
 function makeButtons() {
